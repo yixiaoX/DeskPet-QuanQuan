@@ -18,8 +18,8 @@ class InteractionManager {
     
     // --- 状态记录 ---
     private var lastInteractionTime: Date = Date() // 上次互动时间
-    private let sleepThreshold: TimeInterval = 20 * 60 - 1 // 20 分钟 (单位: 秒)
-    private let idleMessageThreshold: TimeInterval =  10 * 60 - 1 // 10 分钟
+    private let sleepThreshold: TimeInterval = 20 * 60  // 20 分钟 (单位: 秒)
+    private let idleMessageThreshold: TimeInterval =  10 * 60 // 10 分钟
     
     private var isBoring = false    // 用于判断是否后台发送闲置信息
     
@@ -87,7 +87,7 @@ class InteractionManager {
         let randomInterval = Double.random(in: 60...120)
         
         randomActionTimer = Timer.scheduledTimer(withTimeInterval: randomInterval, repeats: false) { [weak self] _ in
-            self?.triggerRandomAction()
+            // self?.triggerRandomAction()
             self?.scheduleNextRandomAction() // 递归调用，保持循环
         }
     }

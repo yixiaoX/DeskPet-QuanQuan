@@ -165,7 +165,7 @@ class PetViewModel: ObservableObject {
         // 打断之前的倒计时 (比如刚喂食还没吃完，又让它睡觉，那“吃完复原”的任务就取消)
         resetTask?.cancel()
         // 执行非睡眠动作时，重置睡眠计时
-        if action != .sleeping || action != .keepSleeping {
+        if action != .sleeping && action != .keepSleeping {
             interactionManager.recordInteraction()
         }
         
