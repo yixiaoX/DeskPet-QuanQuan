@@ -101,7 +101,7 @@ cd DeskPet-QuanQuan
 
 ### 配置 LLM
 
-启动应用后，请前往 **设置 (Settings) -> 连接设置 (Connection)** 中填入你的 API Key 和 Base URL，以便激活宠物的对话功能。
+启动应用后，请前往 **设置 -> 网络连接** 中填入你的 API Key 和 Base URL，以便激活宠物的对话功能。
 
 ## 💻 历史版本
 
