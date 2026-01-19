@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct HistorySettingsView: View {
     @StateObject var vm = HistorySettingsViewModel()
     
-    @ObservedObject var manager = HistoryManager.shared
+    //@ObservedObject var manager = HistoryManager.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -38,7 +38,7 @@ struct HistorySettingsView: View {
                     // 左侧：对话历史
                     HistoryListColumn(
                         title: "对话历史",
-                        count: manager.storage.temporary.count,
+                        count: vm.temporaryMessages.count,
                         selection: Binding(
                             get: { vm.selectedTempIDs },
                             set: { newValue in
@@ -48,7 +48,7 @@ struct HistorySettingsView: View {
                                 }
                             }
                         ),
-                        messages: manager.storage.temporary.sorted { $0.timestamp > $1.timestamp },
+                        messages: vm.temporaryMessages,
                         onDelete: vm.deleteSelectedTemp,
                         onDoubleTap: { msg in
                             vm.startEditing(msg, isPermanent: false)
@@ -89,7 +89,7 @@ struct HistorySettingsView: View {
                     // 右侧：永久记录
                     HistoryListColumn(
                         title: "永久记忆",
-                        count: manager.storage.permanent.count,
+                        count: vm.permanentMessages.count,
                         selection: Binding( // 强制在主线程下一个循环更新，避开视图渲染冲突
                             get: { vm.selectedPermIDs },
                             set: { newValue in
@@ -98,7 +98,7 @@ struct HistorySettingsView: View {
                                 }
                             }
                         ),
-                        messages: manager.storage.permanent.sorted { $0.timestamp > $1.timestamp },
+                        messages: vm.permanentMessages,
                         onDelete: vm.deleteSelectedPerm,
                         onDoubleTap: { msg in
                             vm.startEditing(msg, isPermanent: true)
@@ -108,7 +108,7 @@ struct HistorySettingsView: View {
             }
             .padding(.horizontal)
             
-            // ✨✨✨ 新增：底部全局操作栏 ✨✨✨
+            // 底部全局操作栏
             HStack(spacing: 12) {
                 // 危险操作 1
                 Button(action: { vm.showClearTempAlert = true }) {
@@ -123,7 +123,7 @@ struct HistorySettingsView: View {
                         Label("导入", systemImage: "square.and.arrow.down")
                     }
                     
-                    Button(action: { vm.showFileExporter = true }) {
+                    Button(action: { vm.prepareExport() }) {
                         Label("导出", systemImage: "square.and.arrow.up")
                     }
                 }
@@ -158,31 +158,24 @@ struct HistorySettingsView: View {
             allowsMultipleSelection: false
         ) { result in
             // result 是 Result<[URL], Error>，我们取第一个
-            switch result {
-            case .success(let urls):
-                if let url = urls.first {
-                    vm.handleImport(result: .success(url))
-                }
-            case .failure(let error):
-                vm.handleImport(result: .failure(error))
+            if case .success(let urls) = result, let url = urls.first {
+                vm.handleImport(result: .success(url))
             }
         }
         
         // 2. 导出文件保存器
         .fileExporter(
             isPresented: $vm.showFileExporter,
-            document: vm.getExportDocument(),
+            document: vm.exportDocument,
             contentType: .json,
             defaultFilename: "DeskPet_History_Backup"
-        ) { result in
-            vm.handleExport(result: result)
-        }
+        ) { _ in }
         
         // 3. 清空历史确认
         .alert("确定清空所有对话历史吗？", isPresented: $vm.showClearTempAlert) {
             Button("取消", role: .cancel) { }
             Button("清空", role: .destructive) {
-                manager.clearAllTemporary()
+                vm.clearAllTemporary()
             }
         } message: {
             Text("此操作不可恢复，左侧列表将被清空")
@@ -192,7 +185,7 @@ struct HistorySettingsView: View {
         .alert("确定清空所有永久记忆吗？", isPresented: $vm.showClearPermAlert) {
             Button("取消", role: .cancel) { }
             Button("清空", role: .destructive) {
-                manager.clearAllPermanent()
+                vm.clearAllPermanent()
             }
         } message: {
             Text("慎重！这是AI的核心记忆，清空后它将忘记之前总结的所有重要信息。此操作不可恢复")

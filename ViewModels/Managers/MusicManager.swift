@@ -11,7 +11,7 @@ class MusicManager {
     // 依赖
     private let musicService = MusicService()
     private let chatService = ChatService.shared
-    private let historyManager = HistoryManager.shared
+    private let dbService = DatabaseService.shared
     
     // 状态
     var isAutoListening = false
@@ -60,7 +60,7 @@ class MusicManager {
             if currentID == lastTrackID { return }
             lastTrackID = currentID
             
-            // historyManager.addMessage(role: .user, content: "🎵我正在听「\(track.artist)」的《\(track.title)》") // 存入历史记录
+            // try await dbService.addMessage(role: .user, content: "🎵我正在听「\(track.artist)」的《\(track.title)》") // 存入历史记录
             
             // 3. 发现新歌 -> 通知 UI
             await MainActor.run {
@@ -71,7 +71,7 @@ class MusicManager {
             do {
                 // 调用 ChatService 的 reviewMusic
                 let review = try await chatService.reviewMusic(song: track.title, artist: track.artist)
-                historyManager.addMessage(role: .ai, content: "🎵 [乐评] \(review)")    // 存入历史记录
+                try await dbService.addMessage(role: .ai, content: "🎵 [乐评] \(review)")    // 存入历史记录
                 await MainActor.run {
                     onReviewGenerated?(review)
                 }

@@ -11,7 +11,7 @@ import Combine
 class InteractionManager {
     // 依赖
     private let chatService = ChatService.shared
-    private let historyManager = HistoryManager.shared
+    private let dbService = DatabaseService.shared
     private var defaults: UserDefaults { UserDefaults.standard }
     
     private var petCall: String { defaults.string(forKey: "pet_call_user") ?? "主人" }
@@ -75,7 +75,7 @@ class InteractionManager {
             // 后台自动向 AI 发送一条请求
             let interact = "\(petCall)很久没有理你了。你现在无聊得快睡着了。你要自言自语说句关心的话。"
             let reply = try await chatService.interactReply(interaction: interact)
-            historyManager.addMessage(role: .ai, content: "🥱 [无聊] \(reply)")
+            try await dbService.addMessage(role: .ai, content: "🥱 [无聊] \(reply)")
             onRequestAction?(.sleeping, reply, 20)
         }
     }
@@ -123,7 +123,7 @@ class InteractionManager {
         onRequestAction?(.eating, "正在大口吃\(food)...", 5)
         let feeding = "\(petCall)刚刚给你投喂了一份\(food)。请以第一人称表现出吃完后的感想。"
         let reply = try await chatService.interactReply(interaction: feeding) // 互动行为：\(feeding)
-        historyManager.addMessage(role: .ai, content: "🍪 [被投喂了] \(reply)")
+        try await dbService.addMessage(role: .ai, content: "🍪 [被投喂了] \(reply)")
         try await Task.sleep(for: .milliseconds(2500))  // 异步任务挂起 2.5 秒，等待宠物吃完
         return (.speaking, reply, 5)
     }
@@ -131,7 +131,7 @@ class InteractionManager {
     func focusCompleted(_ reward: Int) async throws -> (action: PetAction, msg: String, duration: TimeInterval) {
         let event = "\(petCall)圆满完成了专注任务！请夸奖\(petCall)，并提到你已经奖励了 \(reward) 金币。"
         let reply = try await chatService.interactReply(interaction: event)
-        historyManager.addMessage(role: .ai, content: "🎉 \(reply)")
+        try await dbService.addMessage(role: .ai, content: "🎉 \(reply)")
         return (.happy, reply, 5)
     }
     
@@ -155,7 +155,7 @@ class InteractionManager {
         recordInteraction()
         let interact = "\(petCall)批评了你"
         let reply = try await chatService.interactReply(interaction: interact)
-        historyManager.addMessage(role: .ai, content: "😫 [被批评了] \(reply)")
+        try await dbService.addMessage(role: .ai, content: "😫 [被批评了] \(reply)")
         return (.sad, reply, 12)
     }
 }

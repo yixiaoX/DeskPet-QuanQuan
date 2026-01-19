@@ -28,7 +28,6 @@
 		5D8362442F173F8D001129F5 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8362432F173F8D001129F5 /* MusicService.swift */; };
 		5DDAD4C92F181B5200616CC0 /* InteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4C82F181B5200616CC0 /* InteractionManager.swift */; };
 		5DDAD4CF2F18412200616CC0 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4CE2F18412200616CC0 /* HistoryModel.swift */; };
-		5DDAD4D12F18414600616CC0 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4D02F18414600616CC0 /* HistoryManager.swift */; };
 		5DDAD4D32F18429600616CC0 /* HistorySettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */; };
 		5DDAD4D52F18430F00616CC0 /* HistorySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4D42F18430F00616CC0 /* HistorySettingsView.swift */; };
 		5DDAD4D72F18480E00616CC0 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD4D62F18480E00616CC0 /* GeneralSettingsView.swift */; };
@@ -55,6 +54,8 @@
 		5DDAD62A2F1D867600616CC0 /* FocusSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD6292F1D867600616CC0 /* FocusSettingsView.swift */; };
 		5DDAD62C2F1D8A5900616CC0 /* FocusStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */; };
 		5DDAD62E2F1D8A8600616CC0 /* FocusWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD62D2F1D8A8600616CC0 /* FocusWindowManager.swift */; };
+		5DDAD81F2F1ECD5B00616CC0 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 5DDAD81E2F1ECD5B00616CC0 /* GRDB */; };
+		5DDAD8212F1ED08B00616CC0 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8202F1ED08B00616CC0 /* DatabaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +80,6 @@
 		5D8362432F173F8D001129F5 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		5DDAD4C82F181B5200616CC0 /* InteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionManager.swift; sourceTree = "<group>"; };
 		5DDAD4CE2F18412200616CC0 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
-		5DDAD4D02F18414600616CC0 /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySettingsViewModel.swift; sourceTree = "<group>"; };
 		5DDAD4D42F18430F00616CC0 /* HistorySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySettingsView.swift; sourceTree = "<group>"; };
 		5DDAD4D62F18480E00616CC0 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -106,6 +106,7 @@
 		5DDAD6292F1D867600616CC0 /* FocusSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSettingsView.swift; sourceTree = "<group>"; };
 		5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusStartView.swift; sourceTree = "<group>"; };
 		5DDAD62D2F1D8A8600616CC0 /* FocusWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusWindowManager.swift; sourceTree = "<group>"; };
+		5DDAD8202F1ED08B00616CC0 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -132,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D83620A2F16E087001129F5 /* SDWebImageSwiftUI in Frameworks */,
+				5DDAD81F2F1ECD5B00616CC0 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +238,7 @@
 				5D8362432F173F8D001129F5 /* MusicService.swift */,
 				5DDAD4D82F18A88A00616CC0 /* ClipboardService.swift */,
 				5D8362362F1706A5001129F5 /* LLMService.swift */,
+				5DDAD8202F1ED08B00616CC0 /* DatabaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -263,7 +266,6 @@
 				5DDAD4DA2F18A8FE00616CC0 /* ReadingManager.swift */,
 				5DDAD4C82F181B5200616CC0 /* InteractionManager.swift */,
 				5DDAD51D2F19926A00616CC0 /* StatsManager.swift */,
-				5DDAD4D02F18414600616CC0 /* HistoryManager.swift */,
 				5DDAD6272F1D7F8000616CC0 /* FocusManager.swift */,
 			);
 			path = Managers;
@@ -322,6 +324,7 @@
 			name = "DeskPet-QuanQuan";
 			packageProductDependencies = (
 				5D8362092F16E087001129F5 /* SDWebImageSwiftUI */,
+				5DDAD81E2F1ECD5B00616CC0 /* GRDB */,
 			);
 			productName = "DeskPet-QuanQuan";
 			productReference = 5D8361F72F16DCF9001129F5 /* Izumi.app */;
@@ -353,6 +356,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5D8362082F16E087001129F5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				5DDAD81D2F1ECD5B00616CC0 /* XCRemoteSwiftPackageReference "GRDB" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5D8361F82F16DCF9001129F5 /* Products */;
@@ -420,7 +424,7 @@
 				5DDAD5EC2F1C40E600616CC0 /* RockPaperScissorsGame.swift in Sources */,
 				5DDAD5212F19932300616CC0 /* FoodStoreViewModel.swift in Sources */,
 				5DDAD54F2F1B49D700616CC0 /* LogWindowManager.swift in Sources */,
-				5DDAD4D12F18414600616CC0 /* HistoryManager.swift in Sources */,
+				5DDAD8212F1ED08B00616CC0 /* DatabaseService.swift in Sources */,
 				5DDAD54B2F1AB71400616CC0 /* BubbleManager.swift in Sources */,
 				5DDAD54D2F1B49B100616CC0 /* LogView.swift in Sources */,
 				5DDAD6002F1CE28400616CC0 /* RandomEventWindowManager.swift in Sources */,
@@ -678,6 +682,14 @@
 				minimumVersion = 3.1.4;
 			};
 		};
+		5DDAD81D2F1ECD5B00616CC0 /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -685,6 +697,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5D8362082F16E087001129F5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		5DDAD81E2F1ECD5B00616CC0 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DDAD81D2F1ECD5B00616CC0 /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

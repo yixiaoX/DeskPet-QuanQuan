@@ -9,10 +9,11 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
     // 全局配置
-    @ObservedObject var manager = HistoryManager.shared
     @AppStorage("alwaysShowInputInBubble") var alwaysShowInputInBubble: Bool = false
     @AppStorage("isInputPermanent") var isInputPermanent: Bool = false
-    @AppStorage("reply_limit") private var replyLimit = 50
+    @AppStorage("reply_limit") private var replyLimit: Int = 50
+    @AppStorage("log_context_limit") private var logLimit: Int = 10
+    @AppStorage("history_summary_limit") private var summaryLimit: Int = 50
     
     var body: some View {
         Form {
@@ -63,7 +64,7 @@ struct GeneralSettingsView: View {
                     CustomStepper(
                         label: "对话记忆深度",
                         description: "AI 读取最近对话的条数。数值越大消耗 Token 越多，但连贯性越好。范围为 0 - 50 条",
-                        value: $manager.contextLimit,
+                        value: $logLimit,
                         range: 0...50,
                         step: 1,
                         unit: " 条"
@@ -75,7 +76,7 @@ struct GeneralSettingsView: View {
                     CustomStepper(
                         label: "长期记忆归档长度",
                         description: "将对话归档为永久记忆时，压缩总结后的文本长度上限。范围为 10 - 500 字",
-                        value: $manager.summaryWordLimit,
+                        value: $summaryLimit,
                         range: 10...500,
                         step: 10,
                         unit: " 字"
@@ -87,6 +88,7 @@ struct GeneralSettingsView: View {
                     .font(.headline)
             }
             
+            /*
             // MARK: - 💾 数据存储
             Section {
                 VStack(alignment: .leading, spacing: 10) {
@@ -161,6 +163,7 @@ struct GeneralSettingsView: View {
                 Label("数据存储", systemImage: "internaldrive.fill")
                     .font(.headline)
             }
+            */
         }
         .formStyle(.grouped)
         .scrollDisabled(true)
@@ -168,7 +171,7 @@ struct GeneralSettingsView: View {
     }
     
     // MARK: - Helper Methods
-    
+    /*
     private func selectCustomPath() {
         let panel = NSOpenPanel()
         panel.canChooseFiles = false
@@ -182,6 +185,7 @@ struct GeneralSettingsView: View {
             manager.saveHistory()
         }
     }
+    */
 }
 
 // MARK: - 🧩 提取出来的子视图组件

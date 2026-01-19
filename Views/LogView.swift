@@ -6,18 +6,37 @@
 //
 
 import SwiftUI
+import Combine
 
-struct LogView: View {
-    @ObservedObject var historyManager = HistoryManager.shared
+// MARK: - ViewModel (新增)
+@MainActor
+class LogViewModel: ObservableObject {
+    @Published var recentLogs: [ChatMessage] = []
     
-    // 获取最近的 10 条临时记录
-    var recentLogs: [ChatMessage] {
-        let all = historyManager.storage.temporary
-        let count = all.count
-        // 取最后 10 条，如果不足 10 条则取全部
-        let startIndex = max(0, count - 10)
-        return Array(all[startIndex..<count])
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        // 订阅数据库变化
+        DatabaseService.shared.observeAllMessages()
+            .map { (temp, _) -> [ChatMessage] in
+                // temp 在 DatabaseService 中已经是按时间倒序排列 (最新的在最前)
+                // 我们取最新的 10 条
+                let latest = temp.prefix(10)
+                
+                // 为了符合人类阅读习惯（从上到下时间递增），我们需要反转数组
+                return Array(latest.reversed())
+            }
+            .receive(on: DispatchQueue.main) // 确保在主线程更新 UI
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] logs in
+                self?.recentLogs = logs
+            })
+            .store(in: &cancellables)
     }
+}
+
+// MARK: - View
+struct LogView: View {
+    @StateObject private var vm = LogViewModel()
     
     var body: some View {
         // 使用统一窗口容器
@@ -74,7 +93,7 @@ struct LogView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 12) {
-                            ForEach(recentLogs) { msg in
+                            ForEach(vm.recentLogs) { msg in
                                 LogRow(msg: msg)
                                     .id(msg.id) // 绑定 ID 用于滚动定位
                             }
@@ -83,23 +102,28 @@ struct LogView: View {
                     }
                     .onAppear {
                         // 打开时自动滚动到底部
-                        if let lastID = recentLogs.last?.id {
-                            // 稍微延迟一点点，确保布局加载完成
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation {
-                                    proxy.scrollTo(lastID, anchor: .bottom)
-                                }
-                            }
-                        }
+                        scrollToBottom(proxy: proxy)
                     }
                     // 当新消息进来时也滚动
-                    .onChange(of: historyManager.storage.temporary.count) {
-                        if let lastID = recentLogs.last?.id {
-                            withAnimation {
-                                proxy.scrollTo(lastID, anchor: .bottom)
-                            }
-                        }
+                    .onChange(of: vm.recentLogs.count) {
+                        scrollToBottom(proxy: proxy)
                     }
+                    // 额外监听最后一条消息 ID 的变化 (应对数量不变但内容变的情况)
+                    .onChange(of: vm.recentLogs.last?.id) {
+                        scrollToBottom(proxy: proxy)
+                    }
+                }
+            }
+        }
+    }
+    
+    // 页面滚动逻辑
+    private func scrollToBottom(proxy: ScrollViewProxy) {
+        if let lastID = vm.recentLogs.last?.id {
+            // 稍微延迟一点点，确保布局加载完成
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    proxy.scrollTo(lastID, anchor: .bottom)
                 }
             }
         }

@@ -132,6 +132,8 @@ class RandomEventViewModel: ObservableObject {
         
         // 4. 保存记录
         let historyLog = "🎲 [路遇记录] \(userName)选择了「\(option.text)」，结果：\(changeText)"
-        HistoryManager.shared.addMessage(role: .system, content: historyLog)
+        Task {
+            try await DatabaseService.shared.addMessage(role: .system, content: historyLog)
+        }
     }
 }

@@ -12,7 +12,7 @@ class ReadingManager {
     // 依赖
     private let clipboardService = ClipboardService.shared
     private let chatService = ChatService.shared
-    private let historyManager = HistoryManager.shared
+    private let dbService = DatabaseService.shared
     
     
     // 状态
@@ -65,7 +65,7 @@ class ReadingManager {
         
         if isNew, let text = content {
             // print("检测到新剪贴板内容，长度: \(text.count)")
-            // historyManager.addMessage(role: .user, content: "📖" + text)    // 存入历史记录
+            // dbService.addMessage(role: .user, content: "📖" + text)    // 存入历史记录
             handleNewContent(text)
         }
     }
@@ -77,7 +77,7 @@ class ReadingManager {
             do {
                 // 调用 ChatService 的 reviewReading
                 let review = try await chatService.reviewReading(content: text)
-                historyManager.addMessage(role: .ai, content: "📖 [书评] \(review)")    // 存入历史记录
+                try await dbService.addMessage(role: .ai, content: "📖 [书评] \(review)")    // 存入历史记录
                 await MainActor.run {
                     // 触发回调通知 ViewModel
                     self.onReviewGenerated?(review)
