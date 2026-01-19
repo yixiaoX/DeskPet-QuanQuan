@@ -20,8 +20,8 @@ class InteractionManager {
     private var lastInteractionTime: Date = Date() // 上次互动时间
     private let sleepThreshold: TimeInterval = 20 * 60 - 1 // 20 分钟 (单位: 秒)
     private let idleMessageThreshold: TimeInterval =  10 * 60 - 1 // 10 分钟
-    // 测试
-    // private let sleepThreshold: TimeInterval = 10
+    
+    private var isBoring = false    // 用于判断是否后台发送闲置信息
     
     // --- 定时器 ---
     private var randomActionTimer: Timer? // 短期随机动作
@@ -58,6 +58,7 @@ class InteractionManager {
     // 用户产生交互时调用此方法 (重置计时器)
     func recordInteraction() {
         lastInteractionTime = Date()
+        isBoring = false
     }
     
     // MARK: - 闲置自动发送消息和睡眠检查
@@ -69,7 +70,8 @@ class InteractionManager {
         } else if Date().timeIntervalSince(lastInteractionTime) >= sleepThreshold {
             // 打盹
             onRequestAction?(.sleeping, "呼...好困呀...💤", 0)
-        } else if Date().timeIntervalSince(lastInteractionTime) >= idleMessageThreshold {
+        } else if Date().timeIntervalSince(lastInteractionTime) >= idleMessageThreshold && !isBoring {
+            isBoring = true
             // 后台自动向 AI 发送一条请求
             let interact = "\(petCall)很久没有理你了。你现在无聊得快睡着了。你要自言自语说句关心的话。"
             let reply = try await chatService.interactReply(interaction: interact)

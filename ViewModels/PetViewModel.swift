@@ -164,8 +164,10 @@ class PetViewModel: ObservableObject {
     private func performAction(action: PetAction, msg: String? = nil, duration: TimeInterval) {
         // 打断之前的倒计时 (比如刚喂食还没吃完，又让它睡觉，那“吃完复原”的任务就取消)
         resetTask?.cancel()
-        // 任何动作执行都意味着“在此刻”是活跃的，重置睡眠计时
-        interactionManager.recordInteraction()
+        // 执行非睡眠动作时，重置睡眠计时
+        if action != .sleeping || action != .keepSleeping {
+            interactionManager.recordInteraction()
+        }
         
         // 1. 更新 UI
         withAnimation {
