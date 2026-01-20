@@ -11,7 +11,7 @@ import Combine
 class FocusSettingsViewModel: ObservableObject {
     @Published var tags: [String] = []
     
-    // 使用相同的 Key，但现在我们直接存取数组
+    // 存取数组
     private let storageKey = "focus_blacklist"
     
     init() {
@@ -46,6 +46,6 @@ class FocusSettingsViewModel: ObservableObject {
     private func save() {
         UserDefaults.standard.set(tags, forKey: storageKey)
         // 立即同步，防止意外丢失
-        // UserDefaults.standard.synchronize() // 新版 macOS 通常不需要手动调用，但写上也无妨
+        UserDefaults.standard.synchronize()
     }
 }

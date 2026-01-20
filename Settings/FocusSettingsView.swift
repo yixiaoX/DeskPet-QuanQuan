@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FocusSettingsView: View {
     @AppStorage("focus_default_duration") private var defaultDuration: Double = 25
-    // @AppStorage("focus_blacklist") private var blackListText: String = ""
+    
     @StateObject private var vm = FocusSettingsViewModel()
     
     var body: some View {

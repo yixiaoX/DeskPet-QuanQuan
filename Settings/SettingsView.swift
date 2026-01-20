@@ -52,15 +52,21 @@ struct SettingsView: View {
                     Label("历史管理", systemImage: "document")
                 }
             
+            // --- Tab 7: 高级设置 ---
+            AdvancedSettingsView()
+                .tabItem {
+                    Label("高级", systemImage: "gearshape.2")
+                }
+            
             /*
             // --- 关于 (可选) ---
             VStack(spacing: 20) {
                 Image(nsImage: NSImage(named: "AppIcon") ?? NSImage())
                     .resizable()
                     .frame(width: 64, height: 64)
-                Text("Pet Izumi")
+                Text("Izumi")
                     .font(.title)
-                Text("版本 Alpha v0.0.1")
+                Text("版本 Alpha v0.1.1")
                     .foregroundColor(.secondary)
             }
             .tabItem {
@@ -69,7 +75,7 @@ struct SettingsView: View {
             */
         }
         // .padding()
-        .frame(width: 600, alignment: .top)
+        .frame(width: 560, alignment: .top)
     }
 }
 

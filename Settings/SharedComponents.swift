@@ -6,6 +6,30 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
+
+// MARK: - 🧩 组件：JSON 文档包装器
+struct JSONFileDocument: FileDocument {
+    // 告诉系统这个文档支持 JSON 类型
+    static var readableContentTypes: [UTType] { [.json] }
+    
+    var jsonData: Data
+    
+    // 初始化方法 1：用于导出（我们把数据塞给它）
+    init(jsonData: Data) {
+        self.jsonData = jsonData
+    }
+    
+    // 初始化方法 2：用于导入（系统把文件读出来给我们）
+    init(configuration: ReadConfiguration) throws {
+        self.jsonData = configuration.file.regularFileContents ?? Data()
+    }
+    
+    // 保存方法：把数据写回磁盘
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        return FileWrapper(regularFileWithContents: jsonData)
+    }
+}
 
 // MARK: - 🧩 组件：统一风格的文本输入框
 struct StyledTextEditor: View {

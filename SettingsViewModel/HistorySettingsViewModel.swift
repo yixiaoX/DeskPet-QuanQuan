@@ -7,23 +7,6 @@
 
 import SwiftUI
 import Combine
-import UniformTypeIdentifiers
-
-// 适配 SwiftUI 导出的文档结构
-struct HistoryJSONDocument: FileDocument {
-    static var readableContentTypes: [UTType] { [.json] }
-    var jsonData: Data
-    
-    init(jsonData: Data) { self.jsonData = jsonData }
-    
-    init(configuration: ReadConfiguration) throws {
-        self.jsonData = configuration.file.regularFileContents ?? Data()
-    }
-    
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        return FileWrapper(regularFileWithContents: jsonData)
-    }
-}
 
 @MainActor
 class HistorySettingsViewModel: ObservableObject {
@@ -53,7 +36,7 @@ class HistorySettingsViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showErrorAlert = false
     
-    @Published var exportDocument: HistoryJSONDocument?
+    @Published var exportDocument: JSONFileDocument?
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -82,7 +65,7 @@ class HistorySettingsViewModel: ObservableObject {
         Task {
             do {
                 let data = try await dbService.exportToJSON()
-                self.exportDocument = HistoryJSONDocument(jsonData: data)
+                self.exportDocument = JSONFileDocument(jsonData: data)
                 self.showFileExporter = true
             } catch {
                 showError("导出准备失败: \(error.localizedDescription)")

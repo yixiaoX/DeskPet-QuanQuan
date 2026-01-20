@@ -14,7 +14,7 @@ struct GeneralSettingsView: View {
     @AppStorage("reply_limit") private var replyLimit: Int = 50
     @AppStorage("log_context_limit") private var logLimit: Int = 10
     @AppStorage("history_summary_limit") private var summaryLimit: Int = 50
-    
+
     var body: some View {
         Form {
             // MARK: - 💬 气泡设置
@@ -87,83 +87,6 @@ struct GeneralSettingsView: View {
                 Label("AI 参数配置", systemImage: "brain.head.profile")
                     .font(.headline)
             }
-            
-            /*
-            // MARK: - 💾 数据存储
-            Section {
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Text("当前存储路径")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        
-                        // 恢复默认按钮
-                        if !manager.customPathString.isEmpty {
-                            Button("恢复默认位置") {
-                                manager.customPathString = ""
-                            }
-                            .buttonStyle(.link)
-                            .controlSize(.small)
-                        }
-                    }
-                    
-                    // 路径显示框 (美化版)
-                    HStack(spacing: 0) {
-                        Image(systemName: "externaldrive.fill")
-                            .foregroundColor(.secondary)
-                            .padding(.leading, 8)
-                            .padding(.trailing, 4)
-                        
-                        Text(manager.activeFileURL.path)
-                            .font(.system(.caption, design: .monospaced)) // 等宽字体显示路径更专业
-                            .foregroundColor(.primary)
-                            .lineLimit(1)
-                            .truncationMode(.middle)
-                            .help(manager.activeFileURL.path)
-                            .padding(.vertical, 6)
-                        
-                        Spacer()
-                        
-                        Divider()
-                            .padding(.vertical, 4)
-                        
-                        // Finder 按钮
-                        Button(action: {
-                            NSWorkspace.shared.activateFileViewerSelecting([manager.activeFileURL])
-                        }) {
-                            Image(systemName: "folder")
-                                .frame(width: 24)
-                        }
-                        .buttonStyle(.borderless)
-                        .help("在 Finder 中显示")
-                        
-                        Divider()
-                            .padding(.vertical, 4)
-                        
-                        // 更改按钮
-                        Button("更改...") {
-                            selectCustomPath()
-                        }
-                        .buttonStyle(.borderless)
-                        .padding(.horizontal, 10)
-                    }
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color(nsColor: .controlBackgroundColor))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                            )
-                    )
-                    .frame(height: 32)
-                }
-                .padding(.vertical, 8)
-            } header: {
-                Label("数据存储", systemImage: "internaldrive.fill")
-                    .font(.headline)
-            }
-            */
         }
         .formStyle(.grouped)
         .scrollDisabled(true)
@@ -172,23 +95,6 @@ struct GeneralSettingsView: View {
         }
         .fixedSize(horizontal: false, vertical: true)
     }
-    
-    // MARK: - Helper Methods
-    /*
-    private func selectCustomPath() {
-        let panel = NSOpenPanel()
-        panel.canChooseFiles = false
-        panel.canChooseDirectories = true
-        panel.allowsMultipleSelection = false
-        panel.message = "选择保存 History.json 的文件夹"
-        
-        if panel.runModal() == .OK, let url = panel.url {
-            let fullPath = url.appendingPathComponent("History.json")
-            manager.customPathString = fullPath.absoluteString
-            manager.saveHistory()
-        }
-    }
-    */
 }
 
 // MARK: - 🧩 提取出来的子视图组件
@@ -221,7 +127,7 @@ struct CustomStepper: View {
     let step: Int
     let unit: String
     
-    // ✨ 核心修复：创建一个 String 类型的代理绑定
+    // 创建一个 String 类型的代理绑定
     // 这样可以接管 TextField 的输入逻辑，防止光标乱跳
     private var valueProxy: Binding<String> {
         Binding<String>(

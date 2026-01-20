@@ -60,6 +60,8 @@
 		5DDAD8252F1F073300616CC0 /* SharedComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8242F1F073300616CC0 /* SharedComponents.swift */; };
 		5DDAD8272F1F082900616CC0 /* RandomEventSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */; };
 		5DDAD82A2F1F0B1000616CC0 /* FocusSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */; };
+		5DDAD8782F1F201A00616CC0 /* SettingsBackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8772F1F201A00616CC0 /* SettingsBackupManager.swift */; };
+		5DDAD87A2F1F292A00616CC0 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8792F1F292A00616CC0 /* AdvancedSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +117,8 @@
 		5DDAD8242F1F073300616CC0 /* SharedComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedComponents.swift; sourceTree = "<group>"; };
 		5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomEventSettingsViewModel.swift; sourceTree = "<group>"; };
 		5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSettingsViewModel.swift; sourceTree = "<group>"; };
+		5DDAD8772F1F201A00616CC0 /* SettingsBackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBackupManager.swift; sourceTree = "<group>"; };
+		5DDAD8792F1F292A00616CC0 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -153,8 +157,10 @@
 			children = (
 				5D83621C2F16E84A001129F5 /* AppEntry */,
 				5D83621D2F16E866001129F5 /* Views */,
-				5DDAD5F62F1C5C4900616CC0 /* WindowManagers */,
 				5D83621E2F16E86E001129F5 /* ViewModels */,
+				5D8362382F17083E001129F5 /* Settings */,
+				5DDAD8282F1F083100616CC0 /* SettingsViewModel */,
+				5DDAD5F62F1C5C4900616CC0 /* WindowManagers */,
 				5D8362352F170653001129F5 /* Services */,
 				5D83621F2F16E878001129F5 /* Models */,
 				5D8362202F16E883001129F5 /* Resources */,
@@ -191,7 +197,6 @@
 				5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */,
 				5DDAD5EF2F1C412C00616CC0 /* GameCenterView.swift */,
 				5DDAD5E82F1C407500616CC0 /* MiniGames */,
-				5D8362382F17083E001129F5 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,7 +208,6 @@
 				5DDAD5FB2F1CE17F00616CC0 /* RandomEventViewModel.swift */,
 				5DDAD5202F19932300616CC0 /* FoodStoreViewModel.swift */,
 				5DDAD51F2F1992BA00616CC0 /* Managers */,
-				5DDAD8282F1F083100616CC0 /* SettingsViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -263,6 +267,7 @@
 				5DDAD6292F1D867600616CC0 /* FocusSettingsView.swift */,
 				5DDAD4D42F18430F00616CC0 /* HistorySettingsView.swift */,
 				5DDAD8242F1F073300616CC0 /* SharedComponents.swift */,
+				5DDAD8792F1F292A00616CC0 /* AdvancedSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */,
 				5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */,
 				5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */,
+				5DDAD8772F1F201A00616CC0 /* SettingsBackupManager.swift */,
 			);
 			path = SettingsViewModel;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				5DDAD5F02F1C412C00616CC0 /* GameCenterView.swift in Sources */,
 				5DDAD4C92F181B5200616CC0 /* InteractionManager.swift in Sources */,
 				5D8362422F173B7D001129F5 /* ChatService.swift in Sources */,
+				5DDAD8782F1F201A00616CC0 /* SettingsBackupManager.swift in Sources */,
 				5D8361FB2F16DCF9001129F5 /* DeskPet_QuanQuanApp.swift in Sources */,
 				5DDAD4CF2F18412200616CC0 /* HistoryModel.swift in Sources */,
 				5D8362232F16E9F1001129F5 /* PetContextMenu.swift in Sources */,
@@ -454,6 +461,7 @@
 				5DDAD6002F1CE28400616CC0 /* RandomEventWindowManager.swift in Sources */,
 				5D83621A2F16E618001129F5 /* PetAvatarView.swift in Sources */,
 				5D83623C2F17318E001129F5 /* PetSettingsView.swift in Sources */,
+				5DDAD87A2F1F292A00616CC0 /* AdvancedSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,7 +615,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yixiao.DeskPet-QuanQuan";
 				PRODUCT_NAME = Izumi;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -654,7 +662,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yixiao.DeskPet-QuanQuan";
 				PRODUCT_NAME = Izumi;
 				PROVISIONING_PROFILE_SPECIFIER = "";
