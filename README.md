@@ -64,10 +64,10 @@
 ### 📂 项目结构概览
 
 ```text
-├── AppEntry            // 应用程序入口 (AppDelegate, App生命周期)
-├── Models              // 数据模型 (数据库, LLM模型定义)
-├── Services            // 核心服务层 (LLM通信, 数据库操作, 剪贴板, 音乐服务)
-├── ViewModels          // 业务逻辑层 (MVVM中的VM)
+├── AppEntry            // 应用程序入口 (AppDelegate, App 生命周期)
+├── Models              // 数据模型 (数据库, LLM 模型定义)
+├── Services            // 核心服务层 (LLM 通信, 数据库操作, 剪贴板, 音乐服务)
+├── ViewModels          // 业务逻辑层 (MVVM 中的 VM)
 │   ├── Managers        // 单例管理器 (状态, 音频, 专注模式, 交互管理)
 │   └── ...             // 视图对应的 ViewModel
 ├── Views               // UI 视图层
@@ -77,7 +77,7 @@
 ├── SettingsViewModels  // 设置面板管理逻辑层
 ├── Settings            // 设置面板 UI 视图层
 ├── WindowManagers      // 窗口管理层 (负责各功能窗口的创建与调度)
-└── Resources           // 资源文件 (Assets, 动画GIF, 图标)
+└── Resources           // 资源文件 (Assets, 动画 GIF, 图标)
 
 ```
 
