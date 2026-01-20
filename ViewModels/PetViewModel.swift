@@ -126,7 +126,7 @@ class PetViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        // 监听专注模式信号
+        // MARK: - 监听专注模式信号
         FocusManager.shared.eventSubject
             .receive(on: RunLoop.main) // 确保在主线程接收，因为要更新 UI
             .sink { [weak self] event in

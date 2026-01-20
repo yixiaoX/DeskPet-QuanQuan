@@ -34,6 +34,12 @@ struct SettingsView: View {
                     Label("我的档案", systemImage: "person.fill")
                 }
             
+            // --- Tab 5: 随机事件配置 ---
+            RandomEventSettingsView()
+                .tabItem {
+                    Label("随机事件", systemImage: "theatermask.and.paintbrush")
+                }
+            
             // --- Tab 5: 专注模式
             FocusSettingsView()
                 .tabItem {
@@ -64,44 +70,6 @@ struct SettingsView: View {
         }
         // .padding()
         .frame(width: 600, alignment: .top)
-    }
-}
-
-// 统一风格的文本输入框
-struct StyledTextEditor: View {
-    let title: String
-    @Binding var text: String
-    var height: CGFloat = 120
-    var helpText: String? = nil
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            // 标题栏（模仿 Form 的 Label 样式，但为了大输入框独立出来）
-            if !title.isEmpty {
-                Text(title)
-                    .font(.body)
-            }
-            
-            // 输入框本体
-            TextEditor(text: $text)
-                .font(.system(size: 13))
-                .frame(height: height)
-                .padding(8)
-                .background(Color(nsColor: .textBackgroundColor)) // 使用系统标准的输入框背景色
-                .cornerRadius(6)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                )
-                .help(helpText ?? "")
-            
-            // 辅助提示文字
-            if let help = helpText {
-                Text(help)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-        }
     }
 }
 

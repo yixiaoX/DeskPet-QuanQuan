@@ -43,6 +43,9 @@ struct UserSettingsView: View {
             }
         }
         .formStyle(.grouped)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
         .fixedSize(horizontal: false, vertical: true)
     }
 }

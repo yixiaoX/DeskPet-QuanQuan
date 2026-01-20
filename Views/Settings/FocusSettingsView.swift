@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FocusSettingsView: View {
     @AppStorage("focus_default_duration") private var defaultDuration: Double = 25
-    @AppStorage("focus_blacklist") private var blackListText: String = ""
+    // @AppStorage("focus_blacklist") private var blackListText: String = ""
+    @StateObject private var vm = FocusSettingsViewModel()
     
     var body: some View {
         Form {
@@ -47,19 +48,44 @@ struct FocusSettingsView: View {
             
             // MARK: - 黑名单设置
             Section {
-                // ✨ 使用统一风格的编辑器
-                StyledTextEditor(
-                    title: "", // Section header 已经有了，这里留空
-                    text: $blackListText,
-                    height: 140,
-                    helpText: "当检测到前台应用名称包含以上关键词（逗号分隔）时，宠物会进行警告"
-                )
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("当检测到前台应用名称包含以下关键词时，宠物会进行警告。")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    if vm.tags.isEmpty {
+                        Text("暂无黑名单")
+                            .font(.caption)
+                            .foregroundColor(.secondary.opacity(0.5))
+                            .italic()
+                            .padding(.vertical, 8)
+                    } else {
+                        // 复用你的 TagFlowLayout 组件
+                        TagFlowLayout(
+                            tags: vm.tags,
+                            color: .red
+                        ) { tag in
+                            vm.removeTag(tag)
+                        }
+                    }
+                }
+                .padding(.vertical, 8)
             } header: {
-                Label("应用黑名单", systemImage: "hand.raised.slash.fill")
-                    .font(.headline)
+                HStack {
+                    Label("应用黑名单", systemImage: "hand.raised.slash.fill")
+                        .font(.headline)
+                    Spacer()
+                    // 复用你的 AddTagButton 组件
+                    AddTagButton(title: "添加违禁应用") { newTag in
+                        vm.addTag(newTag)
+                    }
+                }
             }
         }
         .formStyle(.grouped)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
         .fixedSize(horizontal: false, vertical: true)
     }
 }

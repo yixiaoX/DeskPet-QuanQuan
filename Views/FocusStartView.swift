@@ -13,7 +13,6 @@ struct FocusStartView: View {
     
     // 设置
     @AppStorage("focus_default_duration") private var savedDuration: Double = 25
-    @AppStorage("focus_blacklist") private var savedBlacklist: String = ""
     
     // 临时的时长状态
     @State private var currentDuration: Double = 25
@@ -166,16 +165,10 @@ struct FocusStartView: View {
     // MARK: - 逻辑方法
     
     func startFocus() {
-        // 处理中文逗号，防止分割失败
-        let sanitizedText = savedBlacklist.replacingOccurrences(of: "，", with: ",")
-        // 解析黑名单
-        let keywords = sanitizedText
-            .split(separator: ",")
-            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-        print("启动专注，黑名单为: \(keywords)")
+        let blacklist = UserDefaults.standard.stringArray(forKey: "focus_blacklist") ?? []
+        print("启动专注，黑名单为: \(blacklist)")
         // 启动！(View 会自动监听到 isFocusing 变 true 而切换 UI)
-        focusManager.startFocus(minutes: Int(currentDuration), keywords: keywords)
+        focusManager.startFocus(minutes: Int(currentDuration), keywords: blacklist)
     }
     
     func stopFocus() {

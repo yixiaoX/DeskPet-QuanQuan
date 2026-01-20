@@ -39,11 +39,12 @@ struct PetEventOverlay: NSViewRepresentable {
         private var initialOffset: NSPoint?
         private var isDragging = false
         
-        // 1. 核心：允许非激活状态下的点击穿透
+        // 允许非激活状态下的点击穿透
         override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
             return true
         }
         
+        // 左键按下
         override func mouseDown(with event: NSEvent) {
             // 记录初始状态
             self.isDragging = false

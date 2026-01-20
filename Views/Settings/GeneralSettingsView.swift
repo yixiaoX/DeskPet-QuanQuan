@@ -167,6 +167,9 @@ struct GeneralSettingsView: View {
         }
         .formStyle(.grouped)
         .scrollDisabled(true)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
         .fixedSize(horizontal: false, vertical: true)
     }
     

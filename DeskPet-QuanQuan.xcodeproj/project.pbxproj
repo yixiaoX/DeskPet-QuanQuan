@@ -56,6 +56,10 @@
 		5DDAD62E2F1D8A8600616CC0 /* FocusWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD62D2F1D8A8600616CC0 /* FocusWindowManager.swift */; };
 		5DDAD81F2F1ECD5B00616CC0 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 5DDAD81E2F1ECD5B00616CC0 /* GRDB */; };
 		5DDAD8212F1ED08B00616CC0 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8202F1ED08B00616CC0 /* DatabaseService.swift */; };
+		5DDAD8232F1EFCF900616CC0 /* RandomEventSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8222F1EFCF900616CC0 /* RandomEventSettingsView.swift */; };
+		5DDAD8252F1F073300616CC0 /* SharedComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8242F1F073300616CC0 /* SharedComponents.swift */; };
+		5DDAD8272F1F082900616CC0 /* RandomEventSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */; };
+		5DDAD82A2F1F0B1000616CC0 /* FocusSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +111,10 @@
 		5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusStartView.swift; sourceTree = "<group>"; };
 		5DDAD62D2F1D8A8600616CC0 /* FocusWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusWindowManager.swift; sourceTree = "<group>"; };
 		5DDAD8202F1ED08B00616CC0 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		5DDAD8222F1EFCF900616CC0 /* RandomEventSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomEventSettingsView.swift; sourceTree = "<group>"; };
+		5DDAD8242F1F073300616CC0 /* SharedComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedComponents.swift; sourceTree = "<group>"; };
+		5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomEventSettingsViewModel.swift; sourceTree = "<group>"; };
+		5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -176,14 +184,14 @@
 			children = (
 				5DDAD5F32F1C437F00616CC0 /* Shared */,
 				5D8361FC2F16DCF9001129F5 /* ContentView.swift */,
-				5D8362212F16E8EE001129F5 /* Components */,
+				5D8362212F16E8EE001129F5 /* ContentComponents */,
 				5DDAD5222F19946E00616CC0 /* FoodStoreView.swift */,
 				5DDAD54C2F1B49B100616CC0 /* LogView.swift */,
-				5DDAD5EF2F1C412C00616CC0 /* GameCenterView.swift */,
 				5DDAD5FD2F1CE23F00616CC0 /* RandomEventView.swift */,
+				5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */,
+				5DDAD5EF2F1C412C00616CC0 /* GameCenterView.swift */,
 				5DDAD5E82F1C407500616CC0 /* MiniGames */,
 				5D8362382F17083E001129F5 /* Settings */,
-				5DDAD62B2F1D8A5900616CC0 /* FocusStartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,10 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				5D8362312F16EE14001129F5 /* PetViewModel.swift */,
-				5DDAD5202F19932300616CC0 /* FoodStoreViewModel.swift */,
-				5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */,
 				5DDAD5FB2F1CE17F00616CC0 /* RandomEventViewModel.swift */,
+				5DDAD5202F19932300616CC0 /* FoodStoreViewModel.swift */,
 				5DDAD51F2F1992BA00616CC0 /* Managers */,
+				5DDAD8282F1F083100616CC0 /* SettingsViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -220,7 +228,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		5D8362212F16E8EE001129F5 /* Components */ = {
+		5D8362212F16E8EE001129F5 /* ContentComponents */ = {
 			isa = PBXGroup;
 			children = (
 				5D8362152F16E5F6001129F5 /* BubbleView.swift */,
@@ -228,7 +236,7 @@
 				5D8362192F16E618001129F5 /* PetAvatarView.swift */,
 				5DDAD5F72F1CAF4F00616CC0 /* PetEventOverlay.swift */,
 			);
-			path = Components;
+			path = ContentComponents;
 			sourceTree = "<group>";
 		};
 		5D8362352F170653001129F5 /* Services */ = {
@@ -251,8 +259,10 @@
 				5D83623F2F1731D1001129F5 /* ConnectionSettingsView.swift */,
 				5D83623B2F17318E001129F5 /* PetSettingsView.swift */,
 				5D83623D2F1731AB001129F5 /* UserSettingsView.swift */,
+				5DDAD8222F1EFCF900616CC0 /* RandomEventSettingsView.swift */,
 				5DDAD6292F1D867600616CC0 /* FocusSettingsView.swift */,
 				5DDAD4D42F18430F00616CC0 /* HistorySettingsView.swift */,
+				5DDAD8242F1F073300616CC0 /* SharedComponents.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -299,6 +309,16 @@
 				5DDAD62D2F1D8A8600616CC0 /* FocusWindowManager.swift */,
 			);
 			path = WindowManagers;
+			sourceTree = "<group>";
+		};
+		5DDAD8282F1F083100616CC0 /* SettingsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */,
+				5DDAD8262F1F082900616CC0 /* RandomEventSettingsViewModel.swift */,
+				5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */,
+			);
+			path = SettingsViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,10 +415,12 @@
 				5D8362072F16DF89001129F5 /* AppDelegate.swift in Sources */,
 				5DDAD5232F19946E00616CC0 /* FoodStoreView.swift in Sources */,
 				5D8362442F173F8D001129F5 /* MusicService.swift in Sources */,
+				5DDAD8232F1EFCF900616CC0 /* RandomEventSettingsView.swift in Sources */,
 				5DDAD4D52F18430F00616CC0 /* HistorySettingsView.swift in Sources */,
 				5D8361FD2F16DCF9001129F5 /* ContentView.swift in Sources */,
 				5D8362162F16E5F6001129F5 /* BubbleView.swift in Sources */,
 				5D8362342F17063B001129F5 /* LLMModels.swift in Sources */,
+				5DDAD82A2F1F0B1000616CC0 /* FocusSettingsViewModel.swift in Sources */,
 				5D83623E2F1731AB001129F5 /* UserSettingsView.swift in Sources */,
 				5D8362322F16EE14001129F5 /* PetViewModel.swift in Sources */,
 				5DDAD5FE2F1CE23F00616CC0 /* RandomEventView.swift in Sources */,
@@ -413,6 +435,7 @@
 				5D8362372F1706A5001129F5 /* LLMService.swift in Sources */,
 				5DDAD5512F1B616300616CC0 /* HistoryWindowManager.swift in Sources */,
 				5DDAD4D72F18480E00616CC0 /* GeneralSettingsView.swift in Sources */,
+				5DDAD8252F1F073300616CC0 /* SharedComponents.swift in Sources */,
 				5DDAD5F02F1C412C00616CC0 /* GameCenterView.swift in Sources */,
 				5DDAD4C92F181B5200616CC0 /* InteractionManager.swift in Sources */,
 				5D8362422F173B7D001129F5 /* ChatService.swift in Sources */,
@@ -424,6 +447,7 @@
 				5DDAD5EC2F1C40E600616CC0 /* RockPaperScissorsGame.swift in Sources */,
 				5DDAD5212F19932300616CC0 /* FoodStoreViewModel.swift in Sources */,
 				5DDAD54F2F1B49D700616CC0 /* LogWindowManager.swift in Sources */,
+				5DDAD8272F1F082900616CC0 /* RandomEventSettingsViewModel.swift in Sources */,
 				5DDAD8212F1ED08B00616CC0 /* DatabaseService.swift in Sources */,
 				5DDAD54B2F1AB71400616CC0 /* BubbleManager.swift in Sources */,
 				5DDAD54D2F1B49B100616CC0 /* LogView.swift in Sources */,

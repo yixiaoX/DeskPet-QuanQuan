@@ -12,6 +12,8 @@ struct PetContextMenu: View {
     @ObservedObject var viewModel = PetViewModel()
     @ObservedObject var focusManager = FocusManager.shared
     
+    @Environment(\.openSettings) private var openSettings
+    
     @AppStorage("pet_name") private var petName = "泉泉"
     
     var body: some View {

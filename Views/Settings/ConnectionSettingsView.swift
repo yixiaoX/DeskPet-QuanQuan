@@ -58,6 +58,7 @@ struct ConnectionSettingsView: View {
         }
         .formStyle(.grouped)
         .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
             // 自动拉取逻辑
             if availableModels.count <= 2 && !apiKey.isEmpty {
                 refreshModels()

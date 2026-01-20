@@ -132,16 +132,21 @@ class HistorySettingsViewModel: ObservableObject {
     
     // MARK: - 4. 增删改
     func deleteSelectedTemp() {
+        // 选中的 ID 保存副本
+        let idsToDelete = selectedTempIDs
+        // 清空选中态
+        selectedTempIDs.removeAll()
+        // 执行删除
         Task {
-            try? await dbService.delete(ids: selectedTempIDs)
-            selectedTempIDs.removeAll()
+            try? await dbService.delete(ids: idsToDelete)
         }
     }
     
     func deleteSelectedPerm() {
+        let idsToDelete = selectedPermIDs
+        selectedPermIDs.removeAll()
         Task {
-            try? await dbService.delete(ids: selectedPermIDs)
-            selectedPermIDs.removeAll()
+            try? await dbService.delete(ids: idsToDelete)
         }
     }
     

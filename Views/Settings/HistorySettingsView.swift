@@ -11,8 +11,6 @@ import UniformTypeIdentifiers
 struct HistorySettingsView: View {
     @StateObject var vm = HistorySettingsViewModel()
     
-    //@ObservedObject var manager = HistoryManager.shared
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // --- 顶部说明 ---
@@ -139,7 +137,10 @@ struct HistorySettingsView: View {
             .padding(.horizontal)
             .padding(.bottom)
         }
-        .frame(minHeight: 580, alignment: .top)
+        .frame(minHeight: 550, alignment: .top)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
         .fixedSize(horizontal: false, vertical: false)
         
         // ✨✨✨ 核心：添加编辑弹窗
@@ -253,6 +254,9 @@ struct HistoryListColumn: View {
             HStack {
                 Button(action: onDelete) {
                     Image(systemName: "minus")
+                        .font(.system(size: 12, weight: .bold))
+                        .frame(width: 20, height: 20)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.borderless) // 无边框按钮，融入工具栏
                 .controlSize(.small)

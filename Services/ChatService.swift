@@ -33,6 +33,20 @@ class ChatService {
     // 桌宠心情值
     private var moodValue: Int { defaults.object(forKey: "pet_mood") as? Int ?? 80}
     
+    var eventThemes: [String] {
+        get { defaults.stringArray(forKey: "random_event_themes") ?? defaultThemes }
+        set { defaults.set(newValue, forKey: "random_event_themes") }
+    }
+    
+    // 随机事件配置
+    private let defaultThemes = ["森林冒险", "城市奇遇", "科幻意外", "温馨日常", "悬疑解谜", "魔法失误"]
+    private let defaultMoods = ["开心", "沮丧", "愤怒", "好奇", "害怕", "平静"]
+    
+    // 从 UserDefaults 读取自定义氛围
+    var eventMoods: [String] {
+        get { defaults.stringArray(forKey: "random_event_moods") ?? defaultMoods }
+        set { defaults.set(newValue, forKey: "random_event_moods") }
+    }
 
     // MARK: - 0. 生成人设 (System Prompt)
     private func generateSystemPrompt() -> String {
@@ -220,11 +234,11 @@ class ChatService {
         你在路边捡到一个钱包|交给警察|5,0|偷偷留下|-5,5|无视它走开|0,0 */
         
         // 随机主题
-        let themes = ["森林冒险", "城市奇遇", "科幻意外", "温馨日常", "悬疑解谜", "魔法失误"]
+        let themes = eventThemes.isEmpty ? defaultThemes : eventThemes
         let randomTheme = themes.randomElement() ?? "城市奇遇"
         
-        let moods = ["开心", "沮丧", "愤怒", "好奇", "害怕", "平静"]
-        let randomMood = moods.randomElement() ?? "平静"
+        let moods = eventMoods.isEmpty ? defaultMoods : eventMoods
+        let randomMood = moods.randomElement() ?? "开心"
         
         let userPrompt = "请生成一个关于「\(randomTheme)」的随机事件，当前氛围是「\(randomMood)」"
         
