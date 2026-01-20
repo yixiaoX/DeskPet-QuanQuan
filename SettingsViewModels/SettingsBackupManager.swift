@@ -25,7 +25,7 @@ class SettingsBackupManager {
         "log_context_limit",
         "history_summary_limit",
         
-        // --- 角色设定 (ChatService) ---
+        // --- 角色设定 ---
         "pet_name",
         "pet_gender",
         "pet_call_user",
