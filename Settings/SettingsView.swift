@@ -13,7 +13,7 @@ struct SettingsView: View {
             // --- Tab 1: 通用 ---
             GeneralSettingsView()
                 .tabItem {
-                    Label("通用", systemImage: "gear")
+                    Label("通用", systemImage: "gearshape")
                 }
             
             // --- Tab 2: API 连接 ---
