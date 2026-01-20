@@ -159,7 +159,7 @@
 				5D83621D2F16E866001129F5 /* Views */,
 				5D83621E2F16E86E001129F5 /* ViewModels */,
 				5D8362382F17083E001129F5 /* Settings */,
-				5DDAD8282F1F083100616CC0 /* SettingsViewModel */,
+				5DDAD8282F1F083100616CC0 /* SettingsViewModels */,
 				5DDAD5F62F1C5C4900616CC0 /* WindowManagers */,
 				5D8362352F170653001129F5 /* Services */,
 				5D83621F2F16E878001129F5 /* Models */,
@@ -316,7 +316,7 @@
 			path = WindowManagers;
 			sourceTree = "<group>";
 		};
-		5DDAD8282F1F083100616CC0 /* SettingsViewModel */ = {
+		5DDAD8282F1F083100616CC0 /* SettingsViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				5DDAD4D22F18429600616CC0 /* HistorySettingsViewModel.swift */,
@@ -324,7 +324,7 @@
 				5DDAD8292F1F0B1000616CC0 /* FocusSettingsViewModel.swift */,
 				5DDAD8772F1F201A00616CC0 /* SettingsBackupManager.swift */,
 			);
-			path = SettingsViewModel;
+			path = SettingsViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -615,7 +615,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yixiao.DeskPet-QuanQuan";
 				PRODUCT_NAME = Izumi;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -662,7 +662,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yixiao.DeskPet-QuanQuan";
 				PRODUCT_NAME = Izumi;
 				PROVISIONING_PROFILE_SPECIFIER = "";
