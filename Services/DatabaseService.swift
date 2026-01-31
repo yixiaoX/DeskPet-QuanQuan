@@ -142,6 +142,7 @@ class DatabaseService {
                 .fetchAll(db)
                 .sorted { $0.timestamp < $1.timestamp }
             
+            /*
             // 3. 格式化 (加时间戳)
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -152,8 +153,9 @@ class DatabaseService {
                 newMsg.content = "[\(timeStr)] \(msg.content)"
                 return newMsg
             }
+            */
             
-            return perms + timestampedTemps
+            return perms + temps
         }
     }
     
