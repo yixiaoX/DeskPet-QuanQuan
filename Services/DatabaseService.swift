@@ -138,7 +138,7 @@ class DatabaseService {
             let temps = try ChatMessage
                 .filter(Column("isPermanent") == false)
                 .order(Column("timestamp").desc)
-                .limit(limit)
+                .limit(limit+1)
                 .fetchAll(db)
                 .sorted { $0.timestamp < $1.timestamp }
             
