@@ -67,14 +67,18 @@ class BubbleManager: ObservableObject {
                 if Task.isCancelled { return }
                 
                 await MainActor.run {
-                    self.text.append(char)
+                    if !Task.isCancelled {
+                        self.text.append(char)
+                    }
                 }
                 // 调节打字速度
                 try? await Task.sleep(nanoseconds: 50_000_000)
             }
             
             await MainActor.run {
-                self.isTyping = false
+                if !Task.isCancelled {
+                    self.isTyping = false
+                }
             }
         }
     }
